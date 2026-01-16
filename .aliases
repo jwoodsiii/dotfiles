@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Command aliases
+# LSD
+alias ls="lsd -F"
+alias la="lsd -AF"
+alias ll="lsd -lAF"
+alias lg="lsd -F --group-dirs=first"
+alias tree="lsd -AF --tree"
+alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
+
+# Configs
+alias zshc="nvim ~/.zshrc"
+alias zshs="source ~/.zshrc"
+alias gconfig="nvim ~/.gitconfig"
+
+# afk
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Shortcuts
+alias ws="cd ~/workspace
+
+# colored grep output
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Browser
+alias arc='/Applications/Arc.app/Contents/MacOS/Arc'
+
+# IPs
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com
+alias localip="ipconfig getifaddr en0"
+alias ips=alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# active network interfaces
+alias ifactive=alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
+
+# Canonical hex dump; some systems have this symlinked
+command -v hd > /dev/null || alias hd="hexdump -C"
+
+# macOS has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# macOS has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | pbcopy"
+
+# Show/hide hidden files in Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# URL-encode strings
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+
+# Merge PDF files, preserving hyperlinks
+# Usage: `mergepdf input{1,2,3}.pdf`
+alias mergepdf='gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=_merged.pdf'
+
+# Git
+alias gstatus="git status"
+alias glog="git --no-pager log -n 10"
+alias gcat="git cat-file -p"
+alias glogo="git log --oneline --graph"
+alias ggraph="git log --oneline --graph --all"
+alias gpom="git push origin main"
+alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
