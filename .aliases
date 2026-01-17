@@ -3,7 +3,7 @@
 # Command aliases
 # LSD
 alias ls="eza --icons"
-alias la="eza -la -icons"
+alias la="eza -la --icons"
 alias ll="lsd -l --icons"
 alias lg="lsd -F --group-dirs=first"
 alias tree="lsd -AF --tree"
