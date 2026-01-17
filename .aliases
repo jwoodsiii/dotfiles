@@ -4,7 +4,7 @@
 # LSD
 alias ls="eza --icons"
 alias la="eza -la --icons"
-alias ll="lsd -l --icons"
+alias ll="eza -l --icons"
 alias lg="lsd -F --group-dirs=first"
 alias tree="lsd -AF --tree"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"

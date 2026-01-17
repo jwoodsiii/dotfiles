@@ -10,14 +10,42 @@ backup_if_exists() {
 backup_if_exists ~/.zshrc.local
 ln -sf ~/dotfiles/.zshrc.local ~/.zshrc.local
 
+backup_if_exists ~/.aliases
+ln -sf ~/dotfiles/.aliases ~/.aliases
+
+backup_if_exists ~/.functions
+ln -sf ~/dotfiles/.functions ~/.functions
+
+backup_if_exists ~/.curlrc
+ln -sf ~/dotfiles/.curlrc ~/.curlrc
+
+backup_if_exists ~/.gitignore_global
+ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
+
+mkdir -p ~/.config
+
 # Optionally symlink zpreztorc if you customize it
 backup_if_exists ~/.zpreztorc
 ln -sf ~/dotfiles/zpreztorc ~/.zpreztorc
 
-for app in starship ghostty nvim zed; do
-	backup_if_exists ~/.config/$app
-	ln -sf ~/dotfiles/config/$app ~/.config/$app
+# Symlink everything from dotfiles/config/ into ~/.config/
+for item in ~/dotfiles/config/*; do
+    if [ -e "$item" ]; then
+        basename=$(basename "$item")
+        backup_if_exists ~/.config/"$basename"
+        ln -sf "$item" ~/.config/"$basename"
+        echo "Linked ~/.config/$basename"
+    fi
 done
 
 # Homebrew
+echo "Installing Homebrew packages..."
 brew bundle install --file=~/dotfiles/Brewfile
+
+read -p "Restart shell now? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    exec zsh
+else
+    echo "Run 'exec zsh' or restart your terminal when ready."
+fi
