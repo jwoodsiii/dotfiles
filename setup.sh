@@ -8,7 +8,7 @@ backup_if_exists() {
     fi
 }
 backup_if_exists ~/.zshrc.local
-ln -sf ~/dotfiles/zshrc.local ~/.zshrc.local
+ln -sf ~/dotfiles/.zshrc.local ~/.zshrc.local
 
 # Optionally symlink zpreztorc if you customize it
 backup_if_exists ~/.zpreztorc

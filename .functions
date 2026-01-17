@@ -66,3 +66,11 @@ function getcertnames() {
 		return 1;
 	fi;
 }
+
+# Go
+cover () {
+    local t=$(mktemp -t cover)
+    go test $COVERFLAGS -coverprofile=$t $@ \
+        && go tool cover -func=$t \
+        && unlink $t
+}
