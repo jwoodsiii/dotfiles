@@ -43,6 +43,10 @@ function t() {
  tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
 }
 
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions/zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/dotfiles/.aliases
 source ~/dotfiles/.functions
 source ~/dotfiles/.curlrc

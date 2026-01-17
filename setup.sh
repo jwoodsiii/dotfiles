@@ -14,5 +14,10 @@ ln -sf ~/dotfiles/.zshrc.local ~/.zshrc.local
 backup_if_exists ~/.zpreztorc
 ln -sf ~/dotfiles/zpreztorc ~/.zpreztorc
 
+for app in starship ghostty nvim zed; do
+	backup_if_exists ~/.config/$app
+	ln -sf ~/dotfiles/config/$app ~/.config/$app
+done
+
 # Homebrew
 brew bundle install --file=~/dotfiles/Brewfile
