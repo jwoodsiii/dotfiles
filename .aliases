@@ -18,7 +18,10 @@ alias gconfig="nvim ~/.gitconfig"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Shortcuts
-alias ws="cd ~/workspace
+alias ws="cd ~/workspace"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # colored grep output
 alias grep='grep --color=auto'
