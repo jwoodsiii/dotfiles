@@ -74,3 +74,5 @@ alias glogo="git log --oneline --graph"
 alias ggraph="git log --oneline --graph --all"
 alias gpom="git push origin main"
 alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
+alias gdiff="git diff origin/main"
+alias gpull="git pull origin main"
