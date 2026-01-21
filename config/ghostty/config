@@ -9,4 +9,4 @@ keybind = opt+delete=esc:d
 font-family = MesloLGS Nerd Font Mono
 font-size = 18
 background-opacity = 0.9
-theme = Argonaut
+theme = subliminal-nightfall
