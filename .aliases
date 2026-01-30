@@ -32,9 +32,11 @@ alias egrep='egrep --color=auto'
 alias arc='/Applications/Arc.app/Contents/MacOS/Arc'
 
 # IPs
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
-alias ips=alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+# active network interfaces
+alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # active network interfaces
 alias ifactive=alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
@@ -73,6 +75,6 @@ alias gcat="git cat-file -p"
 alias glogo="git log --oneline --graph"
 alias ggraph="git log --oneline --graph --all"
 alias gpom="git push origin main"
+alias gpum="git pull origin main"
+alias gdf="git diff origin/main"
 alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
-alias gdiff="git diff origin/main"
-alias gpull="git pull origin main"

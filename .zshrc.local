@@ -8,41 +8,6 @@ fi
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:$HOME/go/bin
 
-# Command aliases
-# LSD
-alias ls="lsd -F"
-alias la="lsd -AF"
-alias ll="lsd -lAF"
-alias lg="lsd -F --group-dirs=first"
-alias tree="lsd -AF --tree"
-alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
-
-# Configs
-alias zshc="nvim ~/.zshrc"
-alias zshs="source ~/.zshrc"
-alias gconfig="nvim ~/.gitconfig"
-
-# Git
-alias gstatus="git status"
-alias glog="git --no-pager log -n 10"
-alias gcat="git cat-file -p"
-alias glogo="git log --oneline --graph"
-alias ggraph="git log --oneline --graph --all"
-alias gpom="git push origin main"
-alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
-
-# Functions
-function mkcdir ()
-{
-    mkdir -p -- "$1" &&
-      cd -P -- "$1"
-}
-
-# https://twitter.com/wesbos/status/601426471240998912
-function t() {
- tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2
-}
-
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
