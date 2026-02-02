@@ -15,7 +15,7 @@ alias zshs="source ~/.zshrc"
 alias gconfig="nvim ~/.gitconfig"
 
 # afk
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias afk="pmset displaysleepnow"
 
 # Shortcuts
 alias ws="cd ~/workspace"
