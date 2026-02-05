@@ -5,6 +5,9 @@ keybind = alt+right=esc:f
 keybind = cmd+delete=text:\x0b
 keybind = cmd+backspace=text:\x15
 keybind = opt+delete=esc:d
+keybind = global:cmd+backquote=toggle_quick_terminal
+
+
 
 font-family = MesloLGS Nerd Font Mono
 font-size = 18
