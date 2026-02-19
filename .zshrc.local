@@ -7,6 +7,7 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:$HOME/go/bin
+export EDITOR="zed -w"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
