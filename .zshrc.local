@@ -7,13 +7,16 @@ fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:$HOME/go/bin
+export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="zed -w"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+#eval "$(uv generate-shell-completion zsh)"
 eval "$(fzf --zsh)"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/dotfiles/.aliases
 source ~/dotfiles/.functions
 source ~/dotfiles/.docker.aliases
+source ~/dotfiles/.amp.aliases

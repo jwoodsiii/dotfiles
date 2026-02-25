@@ -1,0 +1,2 @@
+alias ampglog='git log --since="1 month ago" --pretty=format:"%h %an %s" | amp -x "Analyze commit patterns by author, spawn subagents to: 1) identify code review bottlenecks, 2) suggest mentoring opportunities, 3) recommend process improvements" | tee team-insights.md'
+alias ampgcom='git diff --staged | amp -x "Generate a conventional commit message based on these changes"'
