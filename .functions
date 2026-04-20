@@ -74,3 +74,27 @@ cover () {
         && go tool cover -func=$t \
         && unlink $t
 }
+
+# sync dotfiles (symlink setup without brew install)
+dotsync() {
+	echo "Syncing dotfiles..."
+
+	# Symlink root-level dotfiles
+    ln -sf ~/dotfiles/.zshrc.local ~/.zshrc.local
+    ln -sf ~/dotfiles/.aliases ~/.aliases
+    ln -sf ~/dotfiles/.functions ~/.functions
+    ln -sf ~/dotfiles/.curlrc ~/.curlrc
+    ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
+    
+    # Symlink config items
+    mkdir -p ~/.config
+    for item in ~/dotfiles/config/*; do
+        if [ -e "$item" ]; then
+            basename=$(basename "$item")
+            ln -sf "$item" ~/.config/"$basename"
+            echo "✓ Linked ~/.config/$basename"
+        fi
+    done
+    
+    echo "Done!"
+}
