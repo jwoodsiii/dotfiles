@@ -85,7 +85,7 @@ dotsync() {
     ln -sf ~/dotfiles/.functions ~/.functions
     ln -sf ~/dotfiles/.curlrc ~/.curlrc
     ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
-    
+
     # Symlink config items
     mkdir -p ~/.config
     for item in ~/dotfiles/config/*; do
@@ -95,6 +95,37 @@ dotsync() {
             echo "✓ Linked ~/.config/$basename"
         fi
     done
-    
+
     echo "Done!"
+}
+
+assume-aws() {
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: assume-aws <account-id> <role-name>"
+    return 1
+  fi
+
+  # Clear any existing session to avoid stale credentials
+  # taking precedence over the new assume-role call
+  unset AWS_ACCESS_KEY_ID
+  unset AWS_SECRET_ACCESS_KEY
+  unset AWS_SESSION_TOKEN
+
+  local account_id="$1"
+  local role_name="$2"
+  local role_arn="arn:aws:iam::${account_id}:role/${role_name}"
+  local session_name="local-tf-$(date +%s)"
+
+  eval $(aws sts assume-role \
+    --role-arn "$role_arn" \
+    --role-session-name "$session_name" \
+    --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]' \
+    --output text | awk '{
+      print "export AWS_ACCESS_KEY_ID="$1
+      print "export AWS_SECRET_ACCESS_KEY="$2
+      print "export AWS_SESSION_TOKEN="$3
+    }')
+
+  echo "Assumed $role_arn — expires in 1 hour"
+  aws sts get-caller-identity
 }

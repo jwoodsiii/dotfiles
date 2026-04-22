@@ -78,3 +78,11 @@ alias gpom="git push origin main"
 alias gpum="git pull origin main"
 alias gdf="git diff origin/main"
 alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
+
+# Terraform
+alias tf="terraform"
+alias tfp="terraform plan"
+alias tfa="terraform apply"
+
+# AWSCLI
+alias awhoami="aws sts get-caller-identity"
