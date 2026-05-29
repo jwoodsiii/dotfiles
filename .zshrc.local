@@ -1,24 +1,29 @@
-# ~/dotfiles/zshrc.local
+# ~/dotfiles/.zshrc.local
 if [ -f /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# PATH updates
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# PATH
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
+
 export EDITOR="zed -w"
-export AMP_TOOLBOX="~/.config/amp-tools"
 setopt AUTO_CD
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-#eval "$(uv generate-shell-completion zsh)"
-eval "$(fzf --zsh)"
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Shell tools (guarded for fresh installs before brew bundle)
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[fzf] )) && eval "$(fzf --zsh)"
+[[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Dotfiles modules
 source ~/dotfiles/.aliases
 source ~/dotfiles/.functions
 source ~/dotfiles/.docker.aliases
 source ~/dotfiles/.amp.aliases
+
+# Work-specific config (not tracked in public dotfiles)
+[[ -f ~/.zshrc.work ]] && source ~/.zshrc.work

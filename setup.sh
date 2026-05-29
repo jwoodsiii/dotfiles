@@ -25,8 +25,8 @@ ln -sf ~/dotfiles/.gitignore_global ~/.gitignore_global
 mkdir -p ~/.config
 
 # Optionally symlink zpreztorc if you customize it
-backup_if_exists ~/.zpreztorc
-ln -sf ~/dotfiles/zpreztorc ~/.zpreztorc
+# backup_if_exists ~/.zpreztorc
+# ln -sf ~/dotfiles/zpreztorc ~/.zpreztorc
 
 # Symlink everything from dotfiles/config/ into ~/.config/
 for item in ~/dotfiles/config/*; do
@@ -36,6 +36,12 @@ for item in ~/dotfiles/config/*; do
         ln -sf "$item" ~/.config/"$basename"
         echo "Linked ~/.config/$basename"
     fi
+done
+
+# Ghostty custom themes (Ghostty looks in ~/.local/share/ghostty/themes/)
+mkdir -p ~/.local/share/ghostty/themes
+for theme in ~/dotfiles/config/ghostty/themes/*; do
+    [ -e "$theme" ] && ln -sf "$theme" ~/.local/share/ghostty/themes/
 done
 
 # tmux secondary files (sourced by ~/.config/tmux/tmux.conf)
