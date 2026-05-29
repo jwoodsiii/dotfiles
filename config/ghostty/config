@@ -1,15 +1,69 @@
-keybind = cmd+right=text:\x05
-keybind = cmd+left=text:\x01
-keybind = alt+left=esc:b
-keybind = alt+right=esc:f
-keybind = cmd+delete=text:\x0b
-keybind = cmd+backspace=text:\x15
-keybind = opt+delete=esc:d
-keybind = global:cmd+backquote=toggle_quick_terminal
-
-
-
+# ── Font ─────────────────────────────────────────────────────────────────────
 font-family = MesloLGS Nerd Font Mono
-font-size = 18
-background-opacity = 0.9
+font-size = 14
+
+# ── Theme ─────────────────────────────────────────────────────────────────────
+# subliminal-nightfall lives at ~/dotfiles/config/ghostty/themes/subliminal-nightfall
+# Make sure that path is symlinked to ~/.config/ghostty/themes/subliminal-nightfall
 theme = subliminal-nightfall
+
+# ── Background ───────────────────────────────────────────────────────────────
+background-opacity = 0.9
+background-blur-radius = 40     # gmux addition — pairs nicely with opacity
+
+# ── Window ───────────────────────────────────────────────────────────────────
+window-padding-x = 10
+window-padding-y = 10
+window-padding-color = extend
+window-padding-balance = true
+macos-titlebar-style = tabs
+window-inherit-working-directory = false
+
+# ── Cursor & Selection ───────────────────────────────────────────────────────
+cursor-style-blink = true
+selection-invert-fg-bg = true
+
+# ── Shell navigation (original) ───────────────────────────────────────────────
+# Word/line movement that works with zsh/bash readline bindings
+keybind = cmd+right=text:\x05         # Cmd+Right  → end of line (C-e)
+keybind = cmd+left=text:\x01          # Cmd+Left   → start of line (C-a)
+keybind = alt+left=esc:b              # Alt+Left   → back one word
+keybind = alt+right=esc:f             # Alt+Right  → forward one word
+keybind = cmd+delete=text:\x0b        # Cmd+Delete → kill to end of line
+keybind = cmd+backspace=text:\x15     # Cmd+Bksp   → kill whole line
+keybind = opt+delete=esc:d            # Opt+Delete → kill word forward
+
+# ── Ghostty features ──────────────────────────────────────────────────────────
+keybind = super+f=write_screen_file:open    # Save screen content to file
+keybind = shift+enter=text:\n               # Shift+Enter sends literal newline
+
+# ── Quick terminal vs tmux pane cycle — PICK ONE ─────────────────────────────
+#
+# Option A (original): Cmd+` opens Ghostty quick terminal system-wide
+#   keybind = global:cmd+backquote=toggle_quick_terminal
+#
+# Option B (gmux): Cmd+` cycles tmux panes (sends M-`)
+#   Uncomment the tmux bridge block below, leave this commented.
+#
+# Currently set to Option B (tmux workflow). Swap comments to revert.
+
+# ── tmux bridge (gmux) ────────────────────────────────────────────────────────
+# Ghostty sends Meta escape sequences; tmux binds them directly.
+# This lets you use Cmd-keys for tmux without a prefix.
+
+
+# Cmd+`  → cycle to next tmux pane    (M-`)
+# Cmd+1  → cycle to previous pane     (M-1)
+keybind = super+grave_accent=text:\x1b\x60
+
+# Opt+Cmd+1 → reorder window left     (M-!)
+# Opt+Cmd+2 → reorder window right    (M-@)
+keybind = cmd+opt+1=text:\x1b!
+keybind = cmd+opt+2=text:\x1b@
+
+# Cmd+Shift+K → clear screen + scrollback  (M-K)
+keybind = super+shift+k=text:\x1bK
+
+# Hyper+M → toggle tmux pane zoom
+# Requires Karabiner-Elements: map Hyper key (Caps Lock) → F18
+keybind = f18=text:\x1bm

@@ -83,6 +83,3 @@ alias gitsum='git log --pretty=format:"* %s" --author `git config user.email`'
 alias tf="terraform"
 alias tfp="terraform plan"
 alias tfa="terraform apply"
-
-# AWSCLI
-alias awhoami="aws sts get-caller-identity"

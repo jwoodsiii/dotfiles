@@ -129,3 +129,38 @@ assume-aws() {
   echo "Assumed $role_arn — expires in 1 hour"
   aws sts get-caller-identity
 }
+
+cg-capture() {
+  local scenario="$1"
+  local scenario_base="${scenario%%_cgid*}"
+  local state_path="$HOME/.local/pipx/venvs/cloudgoat/lib/python3.14/site-packages/cloudgoat/${scenario}/terraform"
+  local out_base="$HOME/workspace/cloudgoat/cloudgoat-security/fixtures/${scenario_base}"
+  mkdir -p "$(dirname "$out_base")"
+
+  terraform -chdir="$state_path" show -json terraform.tfstate | \
+    jq 'walk(if type == "object" and .sensitive == true then .value = "REDACTED" else . end)' \
+    > "${out_base}.json"
+
+  echo "Captured to ${out_base}.json"
+
+jq '{resources: [.values.root_module.resources[] | {
+  type: .type,
+  name: .name,
+  address: .address,
+  values: (
+    if .type == "aws_iam_access_key" then
+      .values | .id = "REDACTED" | .secret = "REDACTED" | .ses_smtp_password_v4 = "REDACTED"
+    else
+      .values
+    end
+  )
+}]}' "${out_base}.json" > "${out_base}_normalized.json"
+
+  echo "Normalized to ${out_base}_normalized.json"
+}
+
+awhoami() {
+  aws sts get-caller-identity
+  echo "Profile: ${AWS_PROFILE:-default}"
+  echo "Region:  ${AWS_DEFAULT_REGION:-us-east-1}"
+}

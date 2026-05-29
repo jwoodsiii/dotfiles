@@ -8,9 +8,10 @@ fi
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 export EDITOR="zed -w"
 export AMP_TOOLBOX="~/.config/amp-tools"
-
+setopt AUTO_CD
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 #eval "$(uv generate-shell-completion zsh)"
