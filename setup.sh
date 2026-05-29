@@ -38,6 +38,14 @@ for item in ~/dotfiles/config/*; do
     fi
 done
 
+# tmux secondary files (sourced by ~/.config/tmux/tmux.conf)
+echo "→ tmux secondary files"
+mkdir -p ~/.tmux
+ln -sf ~/dotfiles/config/tmux/base.conf           ~/.tmux/base.conf
+ln -sf ~/dotfiles/config/tmux/keys-gmux.conf      ~/.tmux/keys-gmux.conf
+ln -sf ~/dotfiles/config/tmux/keys-vanilla.conf   ~/.tmux/keys-vanilla.conf
+ln -sf ~/dotfiles/config/tmux/scripts             ~/.tmux/scripts
+
 # Homebrew
 echo "Installing Homebrew packages..."
 brew bundle install --file=~/dotfiles/Brewfile
