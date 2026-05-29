@@ -1,0 +1,2 @@
+ 5. Neovim will write the selected lines to the file TEST. Use `:!{unix:(ls),win:(dir)}`{vim} to see it.
+    Do not remove it yet! We will use it in the next lesson.
